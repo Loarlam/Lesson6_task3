@@ -14,7 +14,12 @@ namespace Task3
         public static void FindNext(string str)
         {
             if (_longLine.Contains(str))
-                Console.WriteLine($"Строка найдена!\nПервое включение в текст на {_longLine.IndexOf(str)} символе.\n");
+            {
+                Console.WriteLine($"Строка найдена!");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"\nПервое включение в текст на {_longLine.IndexOf(str)} символе.\n");
+                Console.ResetColor();
+            }
             else
                 Console.WriteLine("Строка отсутствует.");
         }
@@ -52,32 +57,37 @@ namespace Task3
             {
                 do
                 {
-                    Console.WriteLine("Начать цитату со слова:");
+                    Console.Write("Начать цитировать со слова: ");
                     _firstEnteredWord = Console.ReadLine();
 
                     if (QUOTE.IndexOf(_firstEnteredWord) == -1)
-                        Console.WriteLine($"Слова {_firstEnteredWord} нет в тексте. Введи корректное слово:");
+                        Console.WriteLine($"Ошибка! Слово «{_firstEnteredWord}» отсутствует в тексте. Введи корректное слово.\n");
                     else
                         _firstWordInSerchPosition = QUOTE.IndexOf(_firstEnteredWord);
                 } while (QUOTE.IndexOf(_firstEnteredWord) == -1);
 
                 do
                 {
-                    Console.WriteLine("Закончить цититату словом:");
-                    _lastEnteredWord = Console.ReadLine();
+                    do
+                    {
+                        Console.Write("Закончить цитировать словом: ");
+                        _lastEnteredWord = Console.ReadLine();
 
-                    if (QUOTE.IndexOf(_lastEnteredWord) == -1)
-                        Console.WriteLine($"Слова {_lastEnteredWord} нет в тексте. Введи корректное слово:");
-                    else
-                        _lastWorkdInSearchPosition = QUOTE.IndexOf(_lastEnteredWord) + _lastEnteredWord.Length;
-                } while (QUOTE.IndexOf(_lastEnteredWord) == -1);                
+                        if (QUOTE.IndexOf(_lastEnteredWord) < QUOTE.IndexOf(_firstEnteredWord))
+                            Console.WriteLine($"Ошибка! Словом «{_lastEnteredWord}» невозможно закончить цитату. Слово нарушает порядок цитирования.\n");
+                        else if (QUOTE.IndexOf(_lastEnteredWord) == -1)
+                            Console.WriteLine($"Ошибка! Слово {_lastEnteredWord} отсутствует в тексте. Введи корректное слово.\n");
+                    } while (QUOTE.IndexOf(_lastEnteredWord) < QUOTE.IndexOf(_firstEnteredWord));
+
+                    _lastWorkdInSearchPosition = QUOTE.IndexOf(_lastEnteredWord) + _lastEnteredWord.Length;
+                } while (QUOTE.IndexOf(_lastEnteredWord) == -1);
 
                 for (int i = _firstWordInSerchPosition; i < _lastWorkdInSearchPosition; i++)
                 {
                     _savedNotes += QUOTE[i];
                 }
 
-                Console.WriteLine("Заметка создана:");
+                Console.WriteLine("\nЗаметка создана:");
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(_savedNotes);
                 Console.ResetColor();
