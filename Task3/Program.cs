@@ -73,6 +73,7 @@ namespace Task3
                         Console.Write("Закончить цитировать словом: ");
                         _lastEnteredWord = Console.ReadLine();
 
+                        //Как-то нужно реализовать строку ниже
                         if (QUOTE.IndexOf(_lastEnteredWord) < QUOTE.IndexOf(_firstEnteredWord))
                             Console.WriteLine($"Ошибка! Словом «{_lastEnteredWord}» невозможно закончить цитату. Слово нарушает порядок цитирования.\n");
                         else if (QUOTE.IndexOf(_lastEnteredWord) == -1)
