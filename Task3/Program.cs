@@ -17,11 +17,11 @@ namespace Task3
             {
                 Console.WriteLine($"Строка найдена!");
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"\nПервое включение в текст на {_longLine.IndexOf(str)} символе.\n");
+                Console.WriteLine($"Первое включение в текст на {_longLine.IndexOf(str)} символе.\n");
                 Console.ResetColor();
             }
             else
-                Console.WriteLine("Строка отсутствует.");
+                Console.WriteLine("Строка отсутствует.\n");
         }
     }
 
@@ -77,9 +77,10 @@ namespace Task3
                             Console.WriteLine($"Ошибка! Словом «{_lastEnteredWord}» невозможно закончить цитату. Слово нарушает порядок цитирования.\n");
                         else if (QUOTE.IndexOf(_lastEnteredWord) == -1)
                             Console.WriteLine($"Ошибка! Слово {_lastEnteredWord} отсутствует в тексте. Введи корректное слово.\n");
+                        else
+                            _lastWorkdInSearchPosition = QUOTE.IndexOf(_lastEnteredWord) + _lastEnteredWord.Length;
                     } while (QUOTE.IndexOf(_lastEnteredWord) < QUOTE.IndexOf(_firstEnteredWord));
 
-                    _lastWorkdInSearchPosition = QUOTE.IndexOf(_lastEnteredWord) + _lastEnteredWord.Length;
                 } while (QUOTE.IndexOf(_lastEnteredWord) == -1);
 
                 for (int i = _firstWordInSerchPosition; i < _lastWorkdInSearchPosition; i++)
