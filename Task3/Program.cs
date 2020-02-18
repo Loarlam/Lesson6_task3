@@ -74,14 +74,14 @@ namespace Task3
                         _lastEnteredWord = Console.ReadLine();
 
                         //Как-то нужно реализовать строку ниже
-                        if (QUOTE.IndexOf(_lastEnteredWord) < QUOTE.IndexOf(_firstEnteredWord))
+                        if (QUOTE.IndexOf(_lastEnteredWord) > 0 && QUOTE.IndexOf(_lastEnteredWord) <= QUOTE.IndexOf(_firstEnteredWord))
                             Console.WriteLine($"Ошибка! Словом «{_lastEnteredWord}» невозможно закончить цитату. Слово нарушает порядок цитирования.\n");
-                        else if (QUOTE.IndexOf(_lastEnteredWord) == -1)
-                            Console.WriteLine($"Ошибка! Слово {_lastEnteredWord} отсутствует в тексте. Введи корректное слово.\n");
-                        else
-                            _lastWorkdInSearchPosition = QUOTE.IndexOf(_lastEnteredWord) + _lastEnteredWord.Length;
-                    } while (QUOTE.IndexOf(_lastEnteredWord) < QUOTE.IndexOf(_firstEnteredWord));
+                    } while (QUOTE.IndexOf(_lastEnteredWord) > 0 && QUOTE.IndexOf(_lastEnteredWord) <= QUOTE.IndexOf(_firstEnteredWord));
 
+                    if (QUOTE.IndexOf(_lastEnteredWord) == -1)
+                        Console.WriteLine($"Ошибка! Слово {_lastEnteredWord} отсутствует в тексте. Введи корректное слово.\n");
+                    else
+                        _lastWorkdInSearchPosition = QUOTE.IndexOf(_lastEnteredWord) + _lastEnteredWord.Length;
                 } while (QUOTE.IndexOf(_lastEnteredWord) == -1);
 
                 for (int i = _firstWordInSerchPosition; i < _lastWorkdInSearchPosition; i++)
